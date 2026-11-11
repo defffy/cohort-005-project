@@ -5,6 +5,7 @@ import { z } from "zod";
 import type { Route } from "./+types/redeem.$code";
 import { getCurrentUserId } from "~/lib/session";
 import { resolveCountry } from "~/lib/country.server";
+import { getSeatRefundBlock } from "~/lib/refunds.server";
 import { parseParams, parseFormData } from "~/lib/validation";
 import { Card, CardContent } from "~/components/ui/card";
 import { Button } from "~/components/ui/button";
@@ -50,6 +51,11 @@ function redeemCoupon(
 
   if (coupon.redeemedByUserId !== null) {
     return { ok: false, error: "Coupon has already been redeemed" };
+  }
+
+  const refundBlock = getSeatRefundBlock(coupon);
+  if (refundBlock) {
+    return { ok: false, error: refundBlock };
   }
 
   const existingEnrollment = db
@@ -135,11 +141,12 @@ export async function loader({ params, request }: Route.LoaderArgs) {
   }
 
   const alreadyRedeemed = coupon.redeemedByUserId !== null;
+  const refundBlock = alreadyRedeemed ? null : getSeatRefundBlock(coupon);
   const alreadyEnrolled = isUserEnrolled(currentUserId, coupon.courseId);
 
   // Check country mismatch upfront so we can show a clear message
   let countryMismatch = false;
-  if (!alreadyRedeemed && !alreadyEnrolled) {
+  if (!alreadyRedeemed && !refundBlock && !alreadyEnrolled) {
     const userCountry = await resolveCountry(request);
     const purchase = db
       .select()
@@ -155,6 +162,7 @@ export async function loader({ params, request }: Route.LoaderArgs) {
     course: { id: course.id, title: course.title, slug: course.slug },
     code,
     alreadyRedeemed,
+    refundBlock,
     alreadyEnrolled,
     countryMismatch,
   };
@@ -194,8 +202,14 @@ export default function Redeem({
   loaderData,
   actionData,
 }: Route.ComponentProps) {
-  const { course, code, alreadyRedeemed, alreadyEnrolled, countryMismatch } =
-    loaderData;
+  const {
+    course,
+    code,
+    alreadyRedeemed,
+    refundBlock,
+    alreadyEnrolled,
+    countryMismatch,
+  } = loaderData;
   const fetcher = useFetcher();
   const isSubmitting = fetcher.state !== "idle";
 
@@ -208,7 +222,8 @@ export default function Redeem({
   }, [fetcher.data, actionData]);
 
   // Determine which state to show
-  const canRedeem = !alreadyRedeemed && !alreadyEnrolled && !countryMismatch;
+  const canRedeem =
+    !alreadyRedeemed && !refundBlock && !alreadyEnrolled && !countryMismatch;
 
   return (
     <div className="mx-auto max-w-2xl p-6 lg:p-8">
@@ -240,6 +255,16 @@ export default function Redeem({
               <p className="mt-2 text-sm text-muted-foreground">
                 Someone has already claimed this seat. Please ask the person who
                 shared this link for a new coupon.
+              </p>
+            </div>
+          ) : refundBlock ? (
+            <div className="rounded-lg bg-destructive/10 p-4">
+              <div className="flex items-center justify-center gap-2 text-destructive">
+                <AlertCircle className="size-5" />
+                <span className="font-medium">This seat is not available</span>
+              </div>
+              <p className="mt-2 text-sm text-muted-foreground">
+                {refundBlock}
               </p>
             </div>
           ) : alreadyEnrolled ? (
