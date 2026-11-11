@@ -14,8 +14,10 @@ import {
   courses,
   users,
   TeamMemberRole,
+  RefundStatus,
 } from "~/db/schema";
 import { eq, and } from "drizzle-orm";
+import { getSeatRefundState } from "~/lib/refunds.server";
 
 function getTeamForAdmin(userId: number) {
   const membership = db
@@ -60,6 +62,7 @@ interface CouponRow {
   courseId: number;
   courseTitle: string;
   redeemedByEmail: string | null;
+  refundState: RefundStatus.Requested | RefundStatus.Approved | null;
   createdAt: string;
 }
 
@@ -141,6 +144,7 @@ export async function loader({ request }: Route.LoaderArgs) {
       courseId: coupon.courseId,
       courseTitle: course?.title ?? "Unknown Course",
       redeemedByEmail,
+      refundState: getSeatRefundState(coupon),
       createdAt: coupon.createdAt,
     };
   });
@@ -296,6 +300,12 @@ export default function Team({ loaderData }: Route.ComponentProps) {
                         <span className="text-muted-foreground">
                           Claimed by {coupon.redeemedByEmail}
                         </span>
+                      ) : coupon.refundState === RefundStatus.Requested ? (
+                        <span className="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800 dark:bg-amber-900/30 dark:text-amber-300">
+                          Refund requested
+                        </span>
+                      ) : coupon.refundState === RefundStatus.Approved ? (
+                        <span className="text-muted-foreground">Refunded</span>
                       ) : (
                         <span className="inline-flex items-center rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700 dark:bg-green-900/30 dark:text-green-400">
                           Unclaimed
@@ -303,7 +313,7 @@ export default function Team({ loaderData }: Route.ComponentProps) {
                       )}
                     </td>
                     <td className="px-4 py-3">
-                      {!coupon.redeemedByEmail && (
+                      {!coupon.redeemedByEmail && !coupon.refundState && (
                         <CopyButton code={coupon.code} />
                       )}
                     </td>

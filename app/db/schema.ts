@@ -288,6 +288,9 @@ export const coupons = sqliteTable("coupons", {
     .references(() => purchases.id),
   redeemedByUserId: integer("redeemed_by_user_id").references(() => users.id),
   redeemedAt: text("redeemed_at"),
+  // The most recent Refund that gave this Seat back. While that Refund is
+  // Requested the Seat is held, and once it is Approved the Seat is gone.
+  refundId: integer("refund_id").references(() => refunds.id),
   createdAt: text("created_at")
     .notNull()
     .$defaultFn(() => new Date().toISOString()),
