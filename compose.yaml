@@ -1,0 +1,15 @@
+services:
+  app:
+    build: .
+    working_dir: /app
+    ports:
+      - "5173:5173"
+    volumes:
+      # Live source code from the host.
+      - .:/app
+      # Keep node_modules inside Docker. better-sqlite3 is a native module, so
+      # Linux-built binaries must not overwrite (or be overwritten by) the host's.
+      - node_modules:/app/node_modules
+
+volumes:
+  node_modules:

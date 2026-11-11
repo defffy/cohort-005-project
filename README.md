@@ -68,6 +68,26 @@ npm run dev
 
 The app will be running at `http://localhost:5173`. Use the floating DevUI panel to switch between users.
 
+### Running with Docker (optional)
+
+If you'd rather not install Node locally, steps 3–5 can run in Docker instead. Only Docker with Compose is needed:
+
+```bash
+# 3. Install dependencies
+docker compose run --rm app npm ci
+
+# 4. Run database migrations and seed data
+docker compose run --rm app npm run db:migrate
+docker compose run --rm app npm run db:seed
+
+# 5. Start the dev server
+docker compose up
+```
+
+Any other script runs the same way, e.g. `docker compose run --rm app npm run test`.
+
+Your project folder is mounted into the container, so edits and `data.db` stay on your machine. `node_modules` lives in a Docker volume instead, because `better-sqlite3` is a native module built per OS: mixing a Linux build with a macOS one breaks both. Run `npm ci` in the container again after `package.json` or `package-lock.json` changes.
+
 ### What `fork` does
 
 `npx ai-hero-cli fork` turns your clone into your own repo:
