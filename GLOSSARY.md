@@ -42,12 +42,18 @@ The User has asked for a Refund and nobody has decided yet.
 _Avoid_: Pending, open
 
 **Approved**:
-An Admin has accepted the Refund and the Refund Amount is returned to the User.
+An Admin has accepted the Refund and the Refund Amount is returned to the User. For a Purchase for the User's own access, the User loses access to the course at that moment, and their Progress in it and their rating of it are permanently deleted. Their comments stay. They may buy the course again and start afresh. For a team Purchase, the Seats it covers can never be Claimed, and nobody loses access.
 _Avoid_: Done, completed, processed
 
 **Declined**:
-An Admin has turned the Refund down and no money is returned.
+An Admin has turned the Refund down and no money is returned. The User keeps their access, and any Seats it covered are Unclaimed again.
 _Avoid_: Rejected, denied, done
+
+## Courses
+
+**Progress**:
+How far a User has got through a course: the lessons they have completed, how much of the course's video they have watched, and their quiz attempts. The User keeps access while their Refund is Requested, so their Progress can still grow after they ask.
+_Avoid_: Usage, activity
 
 ## Teams
 
