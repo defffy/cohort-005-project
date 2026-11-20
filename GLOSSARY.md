@@ -28,11 +28,11 @@ The money a Refund returns: the amount paid for what is being given back, never 
 _Avoid_: Refundable amount, list price
 
 **Refund Window**:
-The 14 calendar days after a Purchase, including the whole of the last day, during which a Refund can be requested.
+The period after a Purchase during which a Refund can be requested.
 _Avoid_: Cancel window, cancellation window
 
 **Refund Eligibility**:
-Whether a Purchase can still be refunded. A Purchase for the User's own access is eligible while the Refund Window is open, the User has watched less than 2 hours, and they have completed fewer than half of the course's lessons. A team Purchase is eligible while the Refund Window is open and at least one Seat is Unclaimed.
+Whether a Purchase can still be refunded. A Purchase for the User's own access is eligible while the Refund Window is open and the User hasn't yet watched or completed too much of the course. A team Purchase is eligible while the Refund Window is open and at least one Seat is Unclaimed.
 _Avoid_: Cancellation offer, cancellable
 
 ### Refund statuses
