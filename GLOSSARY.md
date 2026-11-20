@@ -1,42 +1,42 @@
 # Cadence
 
-Cadence sells video courses to Learners. This glossary covers the people involved, taking a course, buying it, and getting money back.
+Cadence sells video courses to Students. This glossary covers the people involved, taking a course, buying it, and getting money back.
 
 ## Language
 
 ### People
 
-**Learner**:
+**Student**:
 Someone who buys or takes courses on Cadence.
-_Avoid_: Student, User, Customer
+_Avoid_: Learner, User, Customer
 
 **Platform Admin**:
 A member of Cadence staff who runs the platform. Only a Platform Admin decides Refund Requests.
 _Avoid_: Admin (on its own), the team, Staff
 
 **Team Admin**:
-A learner who buys and manages a Team Licence. A Team Admin has no say over Refund Requests.
+A student who buys and manages a Team Licence. A Team Admin has no say over Refund Requests.
 _Avoid_: Admin (on its own)
 
 **Instructor**:
-Someone who builds and runs their own courses on Cadence, and sees the Learners enrolled on them.
+Someone who builds and runs their own courses on Cadence, and sees the Students enrolled on them.
 _Avoid_: Teacher, Author, Creator
 
 ### Courses
 
 **Enrollment**:
-A learner's place on a course, which lets them take it. A learner has at most one Enrollment per course, however they got it.
+A student's place on a course, which lets them take it. A student has at most one Enrollment per course, however they got it.
 _Avoid_: Place on a course, Access
 
 **Lapsed**:
-A learner who has lost their Enrollment on a course but kept their Progress and Watched time on it.
+A student who has lost their Enrollment on a course but kept their Progress and Watched time on it.
 _Avoid_: Inactive, Expired
 
 **Progress**:
-Which lessons of a course a Learner has completed.
+Which lessons of a course a Student has completed.
 
 **Watched**:
-How much video a Learner has actually played in a course: the furthest point reached in each lesson, added up. Not lessons opened.
+How much video a Student has actually played in a course: the furthest point reached in each lesson, added up. Not lessons opened.
 _Avoid_: Viewed, Progress
 
 ### Purchases
@@ -46,21 +46,21 @@ A single payment for a course. It is either an Individual Purchase or a Team Lic
 _Avoid_: Order, Transaction
 
 **Individual Purchase**:
-A Purchase a learner makes for themselves. It gives the buyer an Enrollment.
+A Purchase a student makes for themselves. It gives the buyer an Enrollment.
 
 **Team Licence**:
 A Purchase a Team Admin makes for others. It grants Seats, not the course itself; the buyer can't watch the course through it.
 _Avoid_: Team purchase, Bulk purchase
 
 **Seat**:
-One place on a Team Licence that a learner can claim to get an Enrollment.
+One place on a Team Licence that a student can claim to get an Enrollment.
 _Avoid_: Coupon, Code, Voucher
 
 **Unclaimed Seat**:
-A Seat no learner has claimed yet.
+A Seat no student has claimed yet.
 
 **Claimed Seat**:
-A Seat a learner has claimed. It belongs to that learner, so a Team Licence with any Claimed Seat can't be refunded.
+A Seat a student has claimed. It belongs to that student, so a Team Licence with any Claimed Seat can't be refunded.
 
 ### Refunds
 
