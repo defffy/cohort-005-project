@@ -51,6 +51,10 @@ _Avoid_: Rejected, denied, done
 
 ## Courses
 
+**Enrolled**:
+A Student with access to a course, either through their own Purchase or a Claimed Seat.
+_Avoid_: Registered, signed up, subscribed
+
 **Progress**:
 How far a User has got through a course: the lessons they have completed, how much of the course's video they have watched, and their quiz attempts. The User keeps access while their Refund is Requested, so their Progress can still grow after they ask.
 _Avoid_: Usage, activity
@@ -68,3 +72,9 @@ _Avoid_: Redeemed, used
 **Unclaimed Seat**:
 A Seat on a team Purchase that no team member has taken yet. It is the only kind of Seat a Refund can cover. While a Refund covering it is Requested, nobody can Claim it.
 _Avoid_: Unused seat, spare seat, free seat
+
+## Notifications
+
+**Notification**:
+A message telling one User that something they care about has happened on Cadence.
+_Avoid_: Alert, activity, message
