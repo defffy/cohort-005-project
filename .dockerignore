@@ -2,3 +2,7 @@
 build
 node_modules
 README.md
+# Local secrets: never bake them into an image
+.env
+.env.*
+!.env.example
